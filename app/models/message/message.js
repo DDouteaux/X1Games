@@ -1,15 +1,15 @@
+const newMessage = require('./message__new');
 var mongoose = require('mongoose');
 
-var Message = mongoose.model(
-    "Message",
-    { 
-        author : String,
-        message : String,
-        timestamp : Number,
-        game: String
-    }
-)
+const messageSchema = mongoose.Schema({
+    author : String,
+    message : String,
+    timestamp : Number,
+    gameId: String
+})
 
-Message.collection.drop(function(err) {});
+messageSchema.plugin(newMessage);
+
+var Message = mongoose.model("Message", messageSchema);
 
 module.exports = Message;

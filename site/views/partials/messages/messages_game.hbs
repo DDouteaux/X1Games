@@ -44,19 +44,19 @@
     }
 
     function getMessages(){
-        $.get("http://192.168.0.15:3000/wordraw/messages", (data) => {
+        $.get(`http://192.168.0.15:3000/games/${$("#gameId").val()}/messages`, (data) => {
             data.forEach(message => addMessage(message));
         })
     }
 
     function sendMessage(message){
-        $.post("http://192.168.0.15:3000/wordraw/messages", message)
+        $.post(`http://192.168.0.15:3000/games/${$("#gameId").val()}/messages`, message)
     }
 
     function socketMessage(message) {
         addMessage(message);
     }
 
-    var socket = io();
+    var socket = io(`/${$("#gameId").val()}`);
     socket.on('message', socketMessage);
 </script>

@@ -31,7 +31,6 @@ function initWordraw (req, res, baseDir) {
             gameId = data.id;
             getAllPlayersInGame(gameId, (err, allPlayers) => {
                 logger.route(`   /${gameId} emit newPlayer event.`);
-                console.log(allPlayers);
                 req.app.get("io").of(`/${gameId}`).emit("newPlayer", allPlayers);
             });
         });

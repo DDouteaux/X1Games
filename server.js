@@ -48,6 +48,7 @@ require('./app/loader/dbConnection');
 require('./app/routes/routes_games_boggle')(app, __dirname);
 require('./app/routes/routes_games_wordraw')(app, __dirname);
 require('./app/routes/routes_games')(app, __dirname);
+require('./app/routes/routes_messages')(app, __dirname);
 require('./app/routes/routes_users')(app, __dirname);
 require('./app/routes/routes')(app, __dirname);
 
