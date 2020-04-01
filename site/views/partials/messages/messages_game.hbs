@@ -1,0 +1,62 @@
+<div class="h-100 d-inline-block col-sm-4 overflow-auto">
+    <input id = "message" class="form-control" placeholder="Votre message..."></input>
+    <br>
+    <button id="send" hidden>Send</button>
+    <dl class="row" id="messages"></dl>
+</div>
+
+<script type="text/javascript">
+    lastTimestamp = 0;
+
+    $( document ).ready(function() {
+        //getMessages();
+        $("#message").focus();
+    });
+
+    $('#message').keypress(function (e) {
+        var key = e.which;
+        if(key == 13)
+        {
+            $("#send").click();
+            $('#message').val("");
+        }
+    });
+
+    $("#send").click(function () {
+        sendMessage({
+            message:$("#message").val()
+        });
+    })
+
+    function addMessage(message){
+        if (message.timestamp > lastTimestamp) {
+            if ($("#messages").children().length > 20) {
+                $("#messages").children().last().remove();
+            }
+            $("#messages").prepend(`
+                <div>
+                    <dt class="col-sm-3">${message.author}</dt>
+                    <dd class="col-sm-9">${message.message}</dd>
+                </div>`
+            );
+            lastTimestamp = message.timestamp;
+        }
+    }
+
+    function getMessages(){
+        $.get("http://192.168.0.15:3000/wordraw/messages", (data) => {
+            data.forEach(message => addMessage(message));
+        })
+    }
+
+    function sendMessage(message){
+        $.post("http://192.168.0.15:3000/wordraw/messages", message)
+    }
+
+    function socketMessage(message) {
+        addMessage(message);
+    }
+
+    var socket = io();
+    socket.on('message', socketMessage);
+</script>

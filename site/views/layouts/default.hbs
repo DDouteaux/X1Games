@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />  
+        <title>X1 Games</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <script src="/dependencies/jquery/jquery.min.js"></script>
+        <script src="/dependencies/jquery/jquery.cookie.js"></script>
+        <script src="/dependencies/jwt/jwt-decode.min.js"></script>
+        <script src="/dependencies/bootstrap/bootstrap.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <link rel="stylesheet" href="/dependencies/bootstrap//bootstrap.min.css">
+        <link rel="stylesheet" href="/dependencies/fontawesome-free-5.12.1-web/css/all.css">
+        <link rel="stylesheet" href="/styles/x1_forms.css">
+    </head>
+
+    <body onunload="disconnectUser()">
+        <div style="margin-top:auto; margin-bottom:auto" class="text-center col-sm-offset-2 text-center col-sm-8 h-100 row">
+            <h1 id="pageTitle">X1 Games</h1>
+            <hr>
+            <div class="alert alert-danger" role="alert" id="displayError" hidden></div>
+            {{{body}}}
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const logginError = urlParams.get('error');
+        if(logginError) {
+            $("#displayError").append(logginError);
+            $('#displayError').show();
+        }
+    })
+</script>

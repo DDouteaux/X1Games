@@ -1,0 +1,13 @@
+<script src="/dependencies/drawingboard/drawingboard.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/dependencies/drawingboard/drawingboard.min.css" type="text/css">
+<div style="height:400px" id="drawingZone"></div>
+
+<script>
+    socket.on("userArrives")
+</script>
+
+<script>
+    var myBoard = new DrawingBoard.Board('drawingZone', {
+        controlsPosition: "bottom"
+    });
+</script>

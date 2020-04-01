@@ -1,0 +1,13 @@
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked + label {
+    border: 3px solid #286090;
+    color: #204d74;
+    padding: 5px;
+}
+
+input[type="radio"] + label {
+    padding: 8px;
+}

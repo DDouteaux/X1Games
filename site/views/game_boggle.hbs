@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/styles/boggle/dice.css">
+<div class="row">
+    <div class="col-sm-7" id="baggle"></div>
+    <div class="col-sm-5">
+        <p>Mots trouvés</p>
+    </div>
+</div>
+
+<script>
+    numberOfDices = 25;
+
+    $( document ).ready(function() {
+        createdDices = 0;
+        while(createdDices < numberOfDices) {
+            if (createdDices % 5 == 0) {
+                $('#baggle').append("<br>"); 
+            }
+            $('#baggle').append(`<div class="dice">${String.fromCharCode(65+Math.floor(Math.random() * 26))}</div>`);
+            createdDices++;
+        }
+
+        var cw = $('.dice').width();
+        $('.dice').css({'height': cw+'px'});
+    });
+
+    $( window ).resize(function() {
+        var cw = $('.dice').width();
+        $('.dice').css({'height': cw+'px'});
+    })
+</script>

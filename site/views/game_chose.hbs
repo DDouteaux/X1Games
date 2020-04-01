@@ -1,0 +1,52 @@
+<div id="greetings" class="text-left font-weight-normal"></div>
+<hr>
+<form method="post" action="http://192.168.0.15/games" id="formGame">
+    <div class="text-left form-group">
+        <label for="game">À quel jeu veux-tu jouer ?</label>
+        <div>
+            <table style="width:100%" id="choseGame">
+            </table>
+        </div>
+    </div>
+    <button method="post" formaction="http://192.168.0.15:3000/games" form="formGame" type="submit" style="width:100%" class="btn btn-primary" id="sendFormChoseGame">Valider</button>
+</form>
+
+<script>
+    possibleGames = [
+        { gameId: "wordraw", name: "Dessine-moi une pizza !", icon: "fas fa-pencil-alt" },
+        { gameId: "boggle", name: "Boggle", icon: "fas fa-sort-alpha-up"}
+    ];
+
+    $( document ).ready(() => {
+        numberOfAddedGames = 0
+        possibleGames.forEach(game => {
+            if (numberOfAddedGames % 2 == 0) {
+                if (numberOfAddedGames == 0) {
+                    $("#choseGame").append("<tr>");
+                } else if (numberOfAddedGames < possibleGames.length) {
+                    $("#choseGame").append("</tr><tr>");
+                }
+            }
+            if (numberOfAddedGames == possibleGames.length) {
+                $("#choseGame").append("</tr>");
+            }
+            console.log("adding game")
+            $("#choseGame").append(`
+                <td style="width:50%" class="text-left align-middle">
+                    <input class="form-check-input" type="radio" name="game" id="${game.gameId}" value="${game.gameId}" hidden>
+                    <label style="width:100%; font-weight: normal !important;" class="text-left" for="${game.gameId}"><i style="padding-right:20px" class="${game.icon} fa-2x"></i>${game.name}</label>
+                </td>
+            `);
+            numberOfAddedGames++;
+        })
+
+        decodedToken = jwt_decode($.cookie("token"))
+        $('#greetings').append(`<i style="padding-right:15px" class="${decodedToken.avatar} fa-2x"></i>Bienvenue à toi ${decodedToken.pseudo} !`);
+    });
+
+    $(document).keypress((e) => {
+        if(e.which == 13) {
+            $('#sendFormChoseGame').click();
+        }
+    });
+</script>
