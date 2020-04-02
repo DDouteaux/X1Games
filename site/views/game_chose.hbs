@@ -1,6 +1,6 @@
 <div id="greetings" class="text-left font-weight-normal"></div>
 <hr>
-<form method="post" action="http://192.168.0.15/games" id="formGame">
+<form method="post" action="http://localhost:3000/games" id="formGame">
     <div class="text-left form-group">
         <label for="game">À quel jeu veux-tu jouer ?</label>
         <div>
@@ -8,7 +8,7 @@
             </table>
         </div>
     </div>
-    <button method="post" formaction="http://192.168.0.15:3000/games" form="formGame" type="submit" style="width:100%" class="btn btn-primary" id="sendFormChoseGame">Valider</button>
+    <button method="post" formaction="http://localhost:3000/games" form="formGame" type="submit" style="width:100%" class="btn btn-primary" id="sendFormChoseGame">Valider</button>
 </form>
 
 <script>
